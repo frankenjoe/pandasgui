@@ -86,7 +86,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         size = self.geometry()
         self.move(int((screen.width() - size.width()) / 2), int((screen.height() - size.height()) / 2))
         # Title and logo
-        self.setWindowTitle('PandasGUI')
+        self.setWindowTitle('AuDB GUI')
         pdgui_icon = 'images/icon.png'
         pdgui_icon_path = pkg_resources.resource_filename(__name__, pdgui_icon)
         self.app.setWindowIcon(QtGui.QIcon(pdgui_icon_path))
