@@ -91,7 +91,8 @@ class PandasGUI(QtWidgets.QMainWindow):
         pdgui_icon_path = pkg_resources.resource_filename(__name__, pdgui_icon)
         self.app.setWindowIcon(QtGui.QIcon(pdgui_icon_path))
 
-        self.show()
+        # TODO: JW: show maximized
+        self.showMaximized()
 
     def setupUI(self):
         """
@@ -345,16 +346,20 @@ def show(*args, block=True, **kwargs):
     # Get the variable names in the scope show() was called from
     callers_local_vars = inspect.currentframe().f_back.f_locals.items()
 
-    # Make a dictionary of the DataFrames from the position args and get their variable names using inspect
-    dataframes = {}
-    for i, df_object in enumerate(args):
-        df_name = 'untitled' + str(i + 1)
+    # TODO: JW: support passing dataframes in a dictionary
+    if isinstance(args[0], dict):
+        dataframes = args[0]
+    else:
+        # Make a dictionary of the DataFrames from the position args and get their variable names using inspect
+        dataframes = {}
+        for i, df_object in enumerate(args):
+            df_name = 'untitled' + str(i + 1)
 
-        for var_name, var_val in callers_local_vars:
-            if var_val is df_object:
-                df_name = var_name
+            for var_name, var_val in callers_local_vars:
+                if var_val is df_object:
+                    df_name = var_name
 
-        dataframes[df_name] = df_object
+            dataframes[df_name] = df_object
 
     # Add the dictionary of positional args to the kwargs
     if (any([key in kwargs.keys() for key in dataframes.keys()])):
