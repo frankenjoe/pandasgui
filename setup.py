@@ -27,6 +27,5 @@ setup(name='pandasgui',
           'plotly',
           'audiofile',
           'sounddevice']
-      )
       package_data=package_data
-
+)
