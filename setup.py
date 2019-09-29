@@ -3,6 +3,12 @@ from setuptools import setup, find_packages
 with open('README.md', 'r') as fh:
     long_description = fh.read()
 
+package_data = {
+    'pandasgui': [
+        'images/*.png',
+    ]
+}
+
 setup(name='pandasgui',
       version='0.1.13',
       description='A GUI for Pandas DataFrames.',
@@ -22,3 +28,5 @@ setup(name='pandasgui',
           'audiofile',
           'sounddevice']
       )
+      package_data=package_data
+
