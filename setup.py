@@ -26,6 +26,6 @@ setup(name='pandasgui',
           'seaborn',
           'plotly',
           'audiofile',
-          'sounddevice']
+          'sounddevice'],
       package_data=package_data
 )
