@@ -203,10 +203,11 @@ class PandasGUI(QtWidgets.QMainWindow):
         styleAction.trigger()
 
         # Creates a debug menu.
-        debugMenu = menubar.addMenu('&Debug')
-        testDialogAction = QtWidgets.QAction('&Test', self)
-        testDialogAction.triggered.connect(self.test)
-        debugMenu.addAction(testDialogAction)
+        # TODO: JW: remove Debug menu
+        # debugMenu = menubar.addMenu('&Debug')
+        # testDialogAction = QtWidgets.QAction('&Test', self)
+        # testDialogAction.triggered.connect(self.test)
+        # debugMenu.addAction(testDialogAction)
 
         '''
         # Creates a chart menu.
