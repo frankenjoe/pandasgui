@@ -91,7 +91,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         pdgui_icon_path = pkg_resources.resource_filename(__name__, pdgui_icon)
         self.app.setWindowIcon(QtGui.QIcon(pdgui_icon_path))
 
-        # TODO: JW: show maximized
+        # JW: show maximized
         self.showMaximized()
 
     def setupUI(self):
@@ -203,7 +203,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         styleAction.trigger()
 
         # Creates a debug menu.
-        # TODO: JW: remove Debug menu
+        # JW: remove Debug menu
         # debugMenu = menubar.addMenu('&Debug')
         # testDialogAction = QtWidgets.QAction('&Test', self)
         # testDialogAction.triggered.connect(self.test)
@@ -347,7 +347,7 @@ def show(*args, block=True, **kwargs):
     # Get the variable names in the scope show() was called from
     callers_local_vars = inspect.currentframe().f_back.f_locals.items()
 
-    # TODO: JW: support passing dataframes in a dictionary
+    # JW: support passing dataframes in a dictionary
     if isinstance(args[0], dict):
         dataframes = args[0]
     else:

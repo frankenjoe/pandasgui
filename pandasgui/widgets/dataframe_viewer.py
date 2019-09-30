@@ -217,7 +217,7 @@ class DataTableModel(QtCore.QAbstractTableModel):
 
     def flags(self, index):
         # Set the table to be editable
-        # TODO: JW: remove editable flag
+        # JW: remove editable flag
         # return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
 
@@ -254,7 +254,7 @@ class DataTableView(QtWidgets.QTableView):
         self.verticalHeader().hide()
 
         # Link selection to headers
-        # TODO: JW: put in comments to speed up
+        # JW: put in comments to speed up
         # self.selectionModel().selectionChanged.connect(self.on_selectionChanged)
 
         # Settings
@@ -447,13 +447,13 @@ class HeaderView(QtWidgets.QTableView):
         # Set initial size
         self.resize(self.sizeHint())
 
-        # TODO: JW: set width of file column
+        # JW: set width of file column
         self.setColumnWidth(0, 160)
 
-        # TODO: JW: connect double click
+        # JW: connect double click
         self.doubleClicked.connect(self.on_doubleClick)
 
-    # TODO: JW: playback audio
+    # JW: playback audio
     def on_doubleClick(self, idx: QModelIndex):
         from ..playback import play_file
         item = self.df.index[idx.row()]
