@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt
 from pandasgui.widgets import PivotDialog, ScatterDialog
 from pandasgui.widgets import DataFrameExplorer
 from pandasgui.widgets import FindToolbar
+from pandasgui.widgets import HeaderWidget
 from pandasgui.utility import fix_ipython
 
 # This makes it so PyQt5 windows don't become unresponsive in IPython outside app._exec() loops
@@ -108,6 +109,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         self.nav_tree.setHeaderLabels(['Name', 'Shape'])
         self.nav_tree.itemSelectionChanged.connect(self.nav_clicked)
 
+        # self.stacked_widget.addWidget(test)
         for df_name in self.df_dicts.keys():
             df_object = self.df_dicts[df_name]['dataframe']
             self.add_dataframe(df_name, df_object)
@@ -133,6 +135,14 @@ class PandasGUI(QtWidgets.QMainWindow):
         # QMainWindow setup
         self.make_menu_bar()
         self.setCentralWidget(self.splitter)
+
+    def add_header(self, text):
+        # JW: add header widget
+        header = HeaderWidget()
+        header.setText(text)
+        dock = QtWidgets.QDockWidget()
+        dock.setWidget(header)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, dock)
 
     def import_dataframe(self, path):
 
@@ -347,9 +357,11 @@ def show(*args, block=True, **kwargs):
     # Get the variable names in the scope show() was called from
     callers_local_vars = inspect.currentframe().f_back.f_locals.items()
 
-    # JW: support passing dataframes in a dictionary
-    if isinstance(args[0], dict):
-        dataframes = args[0]
+    # JW: passing header and dataframes in a dictionary
+    header = None
+    if len(args) > 0 and (isinstance(args[0], str) and isinstance(args[1], dict)):
+        header = args[0]
+        dataframes = args[1]
     else:
         # Make a dictionary of the DataFrames from the position args and get their variable names using inspect
         dataframes = {}
@@ -368,6 +380,10 @@ def show(*args, block=True, **kwargs):
     kwargs = {**kwargs, **dataframes}
 
     pandas_gui = PandasGUI(**kwargs)
+
+    # JW: show header
+    if header:
+        pandas_gui.add_header(header)
 
     if block:
         pandas_gui.app.exec_()
