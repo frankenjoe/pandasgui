@@ -139,17 +139,21 @@ class DataFrameViewer(QtWidgets.QWidget):
         QtWidgets.QWidget.keyPressEvent(self, event)
 
         if event.matches(QtGui.QKeySequence.Copy):
-            print('Ctrl + C')
+            # JW: put in comments
+            # print('Ctrl + C')
             self.dataView.copy()
-        if event.matches(QtGui.QKeySequence.Paste):
-            self.dataView.paste()
-            print('Ctrl + V')
+        # JW: put in comments
+        # if event.matches(QtGui.QKeySequence.Paste):
+            # self.dataView.paste()
+            # print('Ctrl + V')
         if event.key() == Qt.Key_P and (event.modifiers() & Qt.ControlModifier):
             self.dataView.print()
-            print('Ctrl + P')
+            # JW: put in comments
+            # print('Ctrl + P')
         if event.key() == Qt.Key_D and (event.modifiers() & Qt.ControlModifier):
             self.debug()
-            print('Ctrl + D')
+            # JW: put in comments
+            # print('Ctrl + D')
 
     def debug(self):
         print(self.columnHeader.sizeHint())
@@ -302,21 +306,24 @@ class DataTableView(QtWidgets.QTableView):
 
         # If I try to use Pyperclip without starting new thread large values give access denied error
         def thread_function(df):
-            df.to_clipboard(index=False, header=False)
+            # JW: copy with index and use , as separator
+            df.to_clipboard(index=True, header=False, sep=',')
 
         threading.Thread(target=thread_function, args=(df,)).start()
 
-        clipboard.setText(text)
+        # JW: put in comment
+        # clipboard.setText(text)
 
     def paste(self):
         # Set up clipboard object
         app = QtWidgets.QApplication.instance()
         if not app:
             app = QtWidgets.QApplication(sys.argv)
-        clipboard = app.clipboard()
+        # JW: put in comment
+        # clipboard = app.clipboard()
 
         # TODO
-        print(clipboard.text())
+        # print(clipboard.text())
 
     def sizeHint(self):
         # Set width and height based on number of columns in model
