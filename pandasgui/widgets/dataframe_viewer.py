@@ -298,13 +298,11 @@ class DataTableView(QtWidgets.QTableView):
 
         # Get the bounds using the top left and bottom right selected cells
         indexes = self.selectionModel().selection().indexes()
-        print(indexes)
 
         rows = [ix.row() for ix in indexes]
         cols = [ix.column() for ix in indexes]
 
         df = self.model().df.iloc[min(rows):max(rows) + 1, min(cols):max(cols) + 1]
-        print(df)
 
         # If I try to use Pyperclip without starting new thread large values give access denied error
         def thread_function(df):
