@@ -25,5 +25,5 @@ def play_file(path: str, *, start: float = 0, end: float = None):
             warnings.warn('Cannot play channel ', _play_channel)
             return
         x = x[_play_channel, :]
-    play(x, sr)
+    play(x.transpose(), sr)
 
