@@ -340,7 +340,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         win = ScatterDialog(self.df_dicts, default=default, gui=self)
 
 
-def show(*args, block=True, **kwargs):
+def show(*args, block=True, palette=None, **kwargs):
     """
     Create and show a PandasGUI window with all the DataFrames passed. *args and **kwargs should all be DataFrames
 
@@ -384,6 +384,10 @@ def show(*args, block=True, **kwargs):
     # JW: show header
     if header:
         pandas_gui.add_header(header)
+
+    # JW: overide palette
+    if palette is not None:
+        pandas_gui.app.setPalette(palette)
 
     if block:
         pandas_gui.app.exec_()
