@@ -4,6 +4,7 @@ import inspect
 import sys
 import os
 import pkg_resources
+import numpy as np
 import pandas as pd
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
@@ -80,7 +81,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         # Set size
         screen = QtWidgets.QDesktopWidget().screenGeometry()
         percentage_of_screen = 0.7
-        size = tuple((pd.np.array([screen.width(), screen.height()]) * percentage_of_screen).astype(int))
+        size = tuple((np.array([screen.width(), screen.height()]) * percentage_of_screen).astype(int))
         self.resize(QtCore.QSize(*size))
         # Center window on screen
         screen = QtWidgets.QDesktopWidget().screenGeometry()
@@ -200,7 +201,7 @@ class PandasGUI(QtWidgets.QMainWindow):
         editMenu.addAction(findAction)
 
         styleMenu = menubar.addMenu('&Set Style')
-        styleGroup = QtWidgets.QActionGroup(styleMenu, exclusive=True)
+        styleGroup = QtWidgets.QActionGroup(styleMenu)
 
         # Add an option to the menu for each GUI style that exist for the user's system
         for style in QtWidgets.QStyleFactory.keys():
